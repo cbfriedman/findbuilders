@@ -320,7 +320,7 @@ export default async function LeadDetailPage({ params }: { params: Promise<{ id:
                     <p className="text-muted-foreground mb-4">
                       Sign in as a contractor to purchase this lead
                     </p>
-                    <Button asChild className="w-full">
+                    <Button asChild variant="outline" className="w-full">
                       <Link href={`/auth/sign-up?type=contractor&redirect=/leads/${id}`}>
                         Sign Up as Contractor
                       </Link>

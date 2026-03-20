@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { SiteChrome } from '@/components/site-chrome'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { MessageSquare, FileText, Mail, Phone } from 'lucide-react'
@@ -49,6 +50,7 @@ const quickLinks = [
 
 export default function SupportPage() {
   return (
+    <SiteChrome>
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center">
@@ -123,5 +125,6 @@ export default function SupportPage() {
         </div>
       </div>
     </main>
+    </SiteChrome>
   )
 }

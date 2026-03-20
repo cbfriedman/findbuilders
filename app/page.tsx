@@ -302,23 +302,13 @@ export default async function HomePage() {
                 to make the right connections.
               </p>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  asChild
-                  className="gap-2"
-                >
+                <Button variant="outline" asChild className="gap-2">
                   <Link href="/post-job">
                     Post Your Project Free
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                  className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
-                >
+                <Button variant="outline" asChild>
                   <Link href="/auth/sign-up?type=contractor">
                     Sign Up as Contractor
                   </Link>

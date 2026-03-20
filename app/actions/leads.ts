@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { getLeadPrice } from '@/lib/types/database'
 import { headers } from 'next/headers'
 
@@ -278,7 +278,7 @@ export async function startLeadPurchaseSession(leadId: string) {
 
   // Create Stripe checkout session
   try {
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       ui_mode: 'embedded',
       redirect_on_completion: 'never',
       line_items: [

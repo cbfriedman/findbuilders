@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { SiteChrome } from '@/components/site-chrome'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | FindBuilders',
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
+    <SiteChrome>
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold tracking-tight text-foreground">
@@ -104,5 +106,6 @@ export default function PrivacyPage() {
         </div>
       </div>
     </main>
+    </SiteChrome>
   )
 }

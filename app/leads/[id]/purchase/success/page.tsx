@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -38,7 +38,7 @@ export default async function PurchaseSuccessPage({ params, searchParams }: Purc
   // Verify the Stripe session
   if (session_id) {
     try {
-      const session = await stripe.checkout.sessions.retrieve(session_id)
+      const session = await getStripe().checkout.sessions.retrieve(session_id)
       
       if (session.payment_status === 'paid' && session.metadata?.purchase_id) {
         // Update the purchase record

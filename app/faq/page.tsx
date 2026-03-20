@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { SiteChrome } from '@/components/site-chrome'
 import { Button } from '@/components/ui/button'
 import {
   Accordion,
@@ -61,6 +62,7 @@ const contractorFaqs = [
 
 export default function FAQPage() {
   return (
+    <SiteChrome>
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="text-center">
@@ -122,5 +124,6 @@ export default function FAQPage() {
         </div>
       </div>
     </main>
+    </SiteChrome>
   )
 }

@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { SiteChrome } from '@/components/site-chrome'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -39,6 +40,7 @@ export default async function ConsumerJobsPage() {
   }
 
   return (
+    <SiteChrome>
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -116,5 +118,6 @@ export default async function ConsumerJobsPage() {
         </div>
       </div>
     </main>
+    </SiteChrome>
   )
 }

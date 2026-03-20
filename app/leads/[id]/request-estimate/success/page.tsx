@@ -1,9 +1,11 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
+import { SiteChrome } from '@/components/site-chrome'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle2, ArrowRight, Bell } from 'lucide-react'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Request Sent',
   description: 'Your estimate request has been sent to the homeowner.',
 }
@@ -16,7 +18,8 @@ export default async function RequestEstimateSuccessPage({ params }: SuccessPage
   const { id } = await params
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-secondary/30 px-4 py-8">
+    <SiteChrome>
+      <div className="flex flex-1 items-center justify-center bg-secondary/30 px-4 py-8">
       <Card className="max-w-md text-center">
         <CardHeader>
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
@@ -57,6 +60,7 @@ export default async function RequestEstimateSuccessPage({ params }: SuccessPage
           </div>
         </CardContent>
       </Card>
-    </div>
+      </div>
+    </SiteChrome>
   )
 }

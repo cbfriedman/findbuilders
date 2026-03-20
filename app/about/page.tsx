@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { SiteChrome } from '@/components/site-chrome'
 import { Button } from '@/components/ui/button'
 import { Building2, Target, Heart, Users } from 'lucide-react'
 
@@ -28,6 +29,7 @@ const values = [
 
 export default function AboutPage() {
   return (
+    <SiteChrome>
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="bg-primary/5 py-16 lg:py-24">
@@ -115,5 +117,6 @@ export default function AboutPage() {
         </div>
       </section>
     </main>
+    </SiteChrome>
   )
 }

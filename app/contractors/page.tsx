@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { SiteChrome } from '@/components/site-chrome'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { DollarSign, Users, TrendingUp, Shield, Clock, MapPin } from 'lucide-react'
@@ -62,6 +63,7 @@ const steps = [
 
 export default function ContractorsPage() {
   return (
+    <SiteChrome>
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="bg-primary/5 py-16 lg:py-24">
@@ -152,5 +154,6 @@ export default function ContractorsPage() {
         </div>
       </section>
     </main>
+    </SiteChrome>
   )
 }

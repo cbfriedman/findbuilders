@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { headers } from 'next/headers'
 
 export async function createCountySubscription(countyId: string) {
@@ -56,7 +56,7 @@ export async function createCountySubscription(countyId: string) {
   let customerId = profile.stripe_customer_id
 
   if (!customerId) {
-    const customer = await stripe.customers.create({
+    const customer = await getStripe().customers.create({
       email: profile.email,
       name: profile.company_name || profile.full_name || undefined,
       metadata: {
@@ -76,9 +76,9 @@ export async function createCountySubscription(countyId: string) {
   const productId = `county_${county.id}`
   let product
   try {
-    product = await stripe.products.retrieve(productId)
+    product = await getStripe().products.retrieve(productId)
   } catch {
-    product = await stripe.products.create({
+    product = await getStripe().products.create({
       id: productId,
       name: `County Subscription: ${county.name}, ${county.state_abbr}`,
       description: `Unlimited lead access in ${county.name} County, ${county.state}`,
@@ -86,7 +86,7 @@ export async function createCountySubscription(countyId: string) {
   }
 
   // Create or get price
-  const prices = await stripe.prices.list({
+  const prices = await getStripe().prices.list({
     product: product.id,
     active: true,
     recurring: { interval: 'month' },
@@ -97,7 +97,7 @@ export async function createCountySubscription(countyId: string) {
   )
 
   if (!price) {
-    price = await stripe.prices.create({
+    price = await getStripe().prices.create({
       product: product.id,
       unit_amount: county.subscription_price_cents,
       currency: 'usd',
@@ -107,7 +107,7 @@ export async function createCountySubscription(countyId: string) {
 
   // Create checkout session
   try {
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       customer: customerId,
       line_items: [{ price: price.id, quantity: 1 }],
       mode: 'subscription',
@@ -162,7 +162,7 @@ export async function cancelCountySubscription(subscriptionId: string) {
 
   try {
     // Cancel at period end
-    await stripe.subscriptions.update(subscription.stripe_subscription_id, {
+    await getStripe().subscriptions.update(subscription.stripe_subscription_id, {
       cancel_at_period_end: true,
     })
 
@@ -197,7 +197,7 @@ export async function getSubscriptionPortalUrl() {
   }
 
   try {
-    const session = await stripe.billingPortal.sessions.create({
+    const session = await getStripe().billingPortal.sessions.create({
       customer: profile.stripe_customer_id,
       return_url: `${origin}/subscriptions`,
     })
